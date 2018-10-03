@@ -26,5 +26,5 @@ urlpatterns = [
     path('home/', home),
     path('home1/', home1),
     path('home2/', home2),
-    path('filter/', DataFilter.as_view()),
+    path('filter/', filter_opr),
     ]
