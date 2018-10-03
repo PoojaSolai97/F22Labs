@@ -1,0 +1,40 @@
+{% load bootstrap4 %}
+
+<html>
+<body>
+{% block content %}
+  <form method="get">
+    {% csrf_token %}
+    {% bootstrap_form filter.form layout='inline'%}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">Search</button>
+    {% endbuttons %}
+  </form>
+  <hr>
+  <table class="table">
+    <tr>
+      <th>Episode</th>
+      <th>Company</th>
+      <th>Deal</th>
+      <th>Industry</th>
+      <th>Amount</th>
+    </tr>
+       {% for data in filter.qs %}
+           <tr>
+               <td>{{ data.no_in_series}}</td>
+               <td>{{ data.company }}</td>
+               <td>{{ data.deal }}</td>
+               <td>{{ data.industry }}</td>
+               <td>{{ data.amount }}</td>
+           </tr>
+       {% endfor %}
+</table>
+<hr>
+{% bootstrap_pagination lines url="/pagination?page=1&flop=flip" extra="q=foo" size="small" %}
+
+{% bootstrap_pagination lines url="/pagination?page=1" size="large" %}
+
+
+{% endblock %}
+</body>
+</html>
