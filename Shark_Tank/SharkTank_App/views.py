@@ -28,10 +28,8 @@ def home2(request):
         res = serializers.serialize("json", Data.objects.filter(Q(amount__exact = '')&Q(no_of_sharks='0')))
         print(Data.objects.filter(Q(amount__exact = '')&Q(no_of_sharks='0')).count())
         return HttpResponse(res)
-
-class DataFilter(FilterView):
-    context_object_name = 'data'
-    template_name = 'data_filters.html'
-    filter_set = DataFilter
-    def get_queryset(self):
-        return Data.objects.filter(self.request)
+#Filtering operations using FilterClass Set    
+def filter_opr(request):
+	data= Data.objects.all()
+	filter = DataFilter(request.GET, queryset = data)
+	return render(request, 'search/data_filter.html', {'filter' : filter})
